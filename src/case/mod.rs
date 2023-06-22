@@ -113,11 +113,6 @@ pub fn to_case_camel_like(convertable_string: &str, camel_options: CamelOptions)
             new_word = true;
         } else if !found_real_char && is_not_alphanumeric(character) {
             continue;
-        } else if character.is_numeric() {
-            found_real_char = true;
-            // In Ruby, a number does not create a new word – subsequent chars can still be lowercase.
-            // new_word = true;
-            result.push(character);
         } else if last_char_lower_current_is_upper_or_new_word(new_word, last_char, character) {
             found_real_char = true;
             new_word = false;

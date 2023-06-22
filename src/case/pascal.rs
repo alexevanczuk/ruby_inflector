@@ -32,7 +32,7 @@ pub fn to_pascal_case(non_pascalized_string: &str) -> String {
 ///
 /// assert!(is_pascal_case("Foo"));
 /// assert!(is_pascal_case("FooBarIsAReallyReallyLongString"));
-/// assert!(is_pascal_case("FooBarIsAReallyReally3LongString"));
+/// assert!(is_pascal_case("FooBarIsAReallyReally3longString"));
 /// assert!(is_pascal_case("FooBarIsAReallyReallyLongString"));
 ///
 /// assert!(!is_pascal_case("foo"));

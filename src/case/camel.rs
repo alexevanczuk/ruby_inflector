@@ -33,7 +33,7 @@ pub fn to_camel_case(non_camelized_string: &str) -> String {
 /// use ruby_inflector::case::is_camel_case;
 ///
 /// assert!(is_camel_case("foo"));
-/// assert!(is_camel_case("fooBarIsAReallyReally3LongString"));
+/// assert!(is_camel_case("fooBarIsAReallyReally3longString"));
 /// assert!(is_camel_case("fooBarIsAReallyReallyLongString"));
 ///
 /// assert!(!is_camel_case("Foo"));
@@ -88,6 +88,8 @@ mod benchmarks {
 
 #[cfg(test)]
 mod tests {
+    use crate::case::CamelOptions;
+
     use super::is_camel_case;
     use super::to_camel_case;
 
@@ -198,10 +200,28 @@ mod tests {
     }
 
     #[test]
-    fn has_an_integer() {
+    fn has_an_integer_followed_by_a_letter() {
         let convertable_string: String = "my_401k_contribution".to_owned();
         let expected: String = "My401kContribution".to_owned();
         assert_eq!(crate::to_class_case(&convertable_string), expected)
+    }
+
+    #[test]
+    fn has_an_integer_followed_by_an_underscore() {
+        let options = CamelOptions {
+            new_word: true,
+            last_char: ' ',
+            first_word: false,
+            injectable_char: ' ',
+            has_seperator: false,
+            inverted: false,
+        };
+        let convertable_string: String = "abc123_xyz".to_owned();
+        let expected: String = "Abc123Xyz".to_owned();
+        assert_eq!(
+            crate::case::to_case_camel_like(&convertable_string, options),
+            expected
+        )
     }
 
     #[test]
