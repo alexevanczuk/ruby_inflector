@@ -18,6 +18,8 @@ https://api.rubyonrails.org/classes/ActiveSupport/Inflector.html
 keywords = ["pluralize", "camel", "snake", "Inflector", "inflection"]
 categories = ["text-processing", "value-formatting"]
 
+[profile.release]
+
 [lib]
 name = "ruby_inflector"
 
