@@ -3,7 +3,7 @@ use crate::case::*;
 /// Converts a `&str` to camelCase `String`
 ///
 /// ```
-/// use cruet::case::to_camel_case;
+/// use ruby_inflector::case::to_camel_case;
 /// 
 /// assert_eq!(to_camel_case("fooBar"), "fooBar");
 /// assert_eq!(to_camel_case("FOO_BAR"), "fooBar");
@@ -30,7 +30,7 @@ pub fn to_camel_case(non_camelized_string: &str) -> String {
 /// Determines if a `&str` is camelCase bool``
 ///
 /// ```
-/// use cruet::case::is_camel_case;
+/// use ruby_inflector::case::is_camel_case;
 /// 
 /// assert!(is_camel_case("foo"));
 /// assert!(is_camel_case("fooBarIsAReallyReally3LongString"));

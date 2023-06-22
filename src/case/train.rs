@@ -2,7 +2,7 @@ use crate::case::*;
 /// Determines if a `&str` is `Train-Case`
 ///
 /// ```
-/// use cruet::case::train::is_train_case;
+/// use ruby_inflector::case::train::is_train_case;
 /// 
 /// assert!(is_train_case("Foo-Bar-String-That-Is-Really-Really-Long"));
 /// assert!(!is_train_case("foo-bar-string-that-is-really-really-long"));
@@ -19,7 +19,7 @@ pub fn is_train_case(test_string: &str) -> bool {
 /// Converts a `&str` to `Train-Case` `String`
 ///
 /// ```
-/// use cruet::case::train::to_train_case;
+/// use ruby_inflector::case::train::to_train_case;
 /// 
 /// assert!(to_train_case("foo-bar") == "Foo-Bar");
 /// assert!(to_train_case("FOO_BAR") == "Foo-Bar");

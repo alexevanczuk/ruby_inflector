@@ -2,7 +2,7 @@ use crate::case::*;
 /// Converts a `&str` to pascalCase `String`
 ///
 /// ```
-/// use cruet::case::to_pascal_case;
+/// use ruby_inflector::case::to_pascal_case;
 /// 
 /// assert_eq!(to_pascal_case("fooBar"), "FooBar");
 /// assert_eq!(to_pascal_case("FOO_BAR"), "FooBar");
@@ -28,7 +28,7 @@ pub fn to_pascal_case(non_pascalized_string: &str) -> String {
 /// Determines if a `&str` is pascalCase bool``
 ///
 /// ```
-/// use cruet::case::is_pascal_case;
+/// use ruby_inflector::case::is_pascal_case;
 /// 
 /// assert!(is_pascal_case("Foo"));
 /// assert!(is_pascal_case("FooBarIsAReallyReallyLongString"));

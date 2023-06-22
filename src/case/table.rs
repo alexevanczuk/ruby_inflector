@@ -5,7 +5,7 @@ use crate::string::pluralize::to_plural;
 /// Converts a `&str` to `table-case` `String`
 ///
 /// ```
-/// use cruet::case::table::to_table_case;
+/// use ruby_inflector::case::table::to_table_case;
 /// 
 /// assert_eq!(to_table_case("foo-bar"), "foo_bars");
 /// assert_eq!(to_table_case("FOO_BAR"), "foo_bars");
@@ -24,7 +24,7 @@ pub fn to_table_case(non_table_case_string: &str) -> String {
 /// Determines if a `&str` is `table-case`
 ///
 /// ```
-/// use cruet::case::table::is_table_case;
+/// use ruby_inflector::case::table::is_table_case;
 /// assert!(is_table_case("foo_bar_strings"));
 /// assert!(!is_table_case("foo-bar-string-that-is-really-really-long"));
 /// assert!(!is_table_case("FooBarIsAReallyReallyLongString"));

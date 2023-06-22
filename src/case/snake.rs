@@ -2,7 +2,7 @@ use crate::case::*;
 /// Converts a `&str` to `snake_case` `String`
 ///
 /// ```
-/// use cruet::case::to_snake_case;
+/// use ruby_inflector::case::to_snake_case;
 /// 
 /// assert_eq!(to_snake_case("foo_bar"),  "foo_bar");
 /// assert_eq!(to_snake_case("HTTP Foo bar"),  "http_foo_bar");
@@ -21,7 +21,7 @@ pub fn to_snake_case(non_snake_case_string: &str) -> String {
 /// Determines of a `&str` is `snake_case`
 ///
 /// ```
-/// use cruet::case::is_snake_case;
+/// use ruby_inflector::case::is_snake_case;
 /// 
 /// assert!(is_snake_case("foo_bar_string_that_is_really_really_long"));
 /// assert!(is_snake_case("foo_bar_1_string_that_is_really_really_long"));

@@ -1,7 +1,7 @@
 /// Deorginalizes a `&str`
 ///
 /// ```
-/// use cruet::number::deordinalize::deordinalize;
+/// use ruby_inflector::number::deordinalize::deordinalize;
 /// 
 /// assert!(deordinalize("0.1") == "0.1");
 /// assert!(deordinalize("-1st") == "-1");

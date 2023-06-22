@@ -3,7 +3,7 @@ use crate::case::class::to_class_case;
 /// Deconstantizes a `&str`
 ///
 /// ```
-/// use cruet::string::deconstantize::deconstantize;
+/// use ruby_inflector::string::deconstantize::deconstantize;
 /// let mock_string: &str = "Bar";
 /// let expected_string: String = "".to_owned();
 /// let asserted_string: String = deconstantize(mock_string);
@@ -11,7 +11,7 @@ use crate::case::class::to_class_case;
 ///
 /// ```
 /// ```
-/// use cruet::string::deconstantize::deconstantize;
+/// use ruby_inflector::string::deconstantize::deconstantize;
 /// let mock_string: &str = "::Bar";
 /// let expected_string: String = "".to_owned();
 /// let asserted_string: String = deconstantize(mock_string);
@@ -19,7 +19,7 @@ use crate::case::class::to_class_case;
 ///
 /// ```
 /// ```
-/// use cruet::string::deconstantize::deconstantize;
+/// use ruby_inflector::string::deconstantize::deconstantize;
 /// let mock_string: &str = "Foo::Bar";
 /// let expected_string: String = "Foo".to_owned();
 /// let asserted_string: String = deconstantize(mock_string);
@@ -27,7 +27,7 @@ use crate::case::class::to_class_case;
 ///
 /// ```
 /// ```
-/// use cruet::string::deconstantize::deconstantize;
+/// use ruby_inflector::string::deconstantize::deconstantize;
 /// let mock_string: &str = "Test::Foo::Bar";
 /// let expected_string: String = "Foo".to_owned();
 /// let asserted_string: String = deconstantize(mock_string);

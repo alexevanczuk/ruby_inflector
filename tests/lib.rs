@@ -1,7 +1,7 @@
-extern crate cruet;
+extern crate ruby_inflector;
 
-use cruet::Inflector;
-use cruet::InflectorNumbers;
+use ruby_inflector::Inflector;
+use ruby_inflector::InflectorNumbers;
 
 macro_rules! str_tests {
     ( $($test_name:ident => $imp_trait:ident => $to_cast:expr => $casted:expr), *) => {

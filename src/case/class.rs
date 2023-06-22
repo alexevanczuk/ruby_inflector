@@ -4,7 +4,7 @@ use crate::string::singularize::to_singular;
 /// Converts a `&str` to `ClassCase` `String`
 ///
 /// ```
-/// use cruet::case::to_class_case;
+/// use ruby_inflector::case::to_class_case;
 /// 
 /// assert_eq!(to_class_case("FooBar"), "FooBar");
 /// assert_eq!(to_class_case("FooBars"), "FooBar");
@@ -33,7 +33,7 @@ pub fn to_class_case(non_class_case_string: &str) -> String {
 /// Determines if a `&str` is `ClassCase` `bool`
 ///
 /// ```
-/// use cruet::case::is_class_case;
+/// use ruby_inflector::case::is_class_case;
 /// 
 /// assert!(is_class_case("Foo"));
 /// assert!(is_class_case("FooBarIsAReallyReallyLongString"));

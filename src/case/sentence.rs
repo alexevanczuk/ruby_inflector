@@ -2,7 +2,7 @@ use crate::case::*;
 /// Converts a `&str` to `Sentence case` `String`
 ///
 /// ```
-/// use cruet::case::to_sentence_case;
+/// use ruby_inflector::case::to_sentence_case;
 /// 
 /// assert_eq!(to_sentence_case("Foo bar"), "Foo bar");
 /// assert_eq!(to_sentence_case("FooBar"), "Foo bar");
@@ -25,7 +25,7 @@ pub fn to_sentence_case(non_sentence_case_string: &str) -> String {
 /// Determines of a `&str` is `Sentence case`
 ///
 /// ```
-/// use cruet::case::is_sentence_case;
+/// use ruby_inflector::case::is_sentence_case;
 /// 
 /// assert!(is_sentence_case("Foo"));
 /// assert!(is_sentence_case("Foo bar string that is really really long"));
