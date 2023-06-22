@@ -1,5 +1,5 @@
 [package]
-name = "ruby-inflector"
+name = "ruby_inflector"
 version = "0.0.2"
 authors = ["Josh Teeter<joshteeter@gmail.com>", "Chrislearn Young<chris@kenorld.com>"]
 edition = "2021"
