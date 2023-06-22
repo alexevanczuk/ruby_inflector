@@ -4,7 +4,7 @@ use crate::case::*;
 ///
 /// ```
 /// use ruby_inflector::case::to_camel_case;
-/// 
+///
 /// assert_eq!(to_camel_case("fooBar"), "fooBar");
 /// assert_eq!(to_camel_case("FOO_BAR"), "fooBar");
 /// assert_eq!(to_camel_case("Foo Bar"), "fooBar");
@@ -31,11 +31,11 @@ pub fn to_camel_case(non_camelized_string: &str) -> String {
 ///
 /// ```
 /// use ruby_inflector::case::is_camel_case;
-/// 
+///
 /// assert!(is_camel_case("foo"));
 /// assert!(is_camel_case("fooBarIsAReallyReally3LongString"));
 /// assert!(is_camel_case("fooBarIsAReallyReallyLongString"));
-/// 
+///
 /// assert!(!is_camel_case("Foo"));
 /// assert!(!is_camel_case("foo-bar-string-that-is-really-really-long"));
 /// assert!(!is_camel_case("FooBarIsAReallyReallyLongString"));

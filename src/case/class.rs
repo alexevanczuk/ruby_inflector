@@ -5,7 +5,7 @@ use crate::string::singularize::to_singular;
 ///
 /// ```
 /// use ruby_inflector::case::to_class_case;
-/// 
+///
 /// assert_eq!(to_class_case("FooBar"), "FooBar");
 /// assert_eq!(to_class_case("FooBars"), "FooBar");
 /// assert_eq!(to_class_case("Foo Bar"), "FooBar");
@@ -34,10 +34,10 @@ pub fn to_class_case(non_class_case_string: &str) -> String {
 ///
 /// ```
 /// use ruby_inflector::case::is_class_case;
-/// 
+///
 /// assert!(is_class_case("Foo"));
 /// assert!(is_class_case("FooBarIsAReallyReallyLongString"));
-/// 
+///
 /// assert!(!is_class_case("foo"));
 /// assert!(!is_class_case("FooBarIsAReallyReallyLongStrings"));
 /// assert!(!is_class_case("foo-bar-string-that-is-really-really-long"));

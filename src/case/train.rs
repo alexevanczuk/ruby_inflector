@@ -3,7 +3,7 @@ use crate::case::*;
 ///
 /// ```
 /// use ruby_inflector::case::train::is_train_case;
-/// 
+///
 /// assert!(is_train_case("Foo-Bar-String-That-Is-Really-Really-Long"));
 /// assert!(!is_train_case("foo-bar-string-that-is-really-really-long"));
 /// assert!(!is_train_case("FooBarIsAReallyReallyLongString"));
@@ -20,7 +20,7 @@ pub fn is_train_case(test_string: &str) -> bool {
 ///
 /// ```
 /// use ruby_inflector::case::train::to_train_case;
-/// 
+///
 /// assert!(to_train_case("foo-bar") == "Foo-Bar");
 /// assert!(to_train_case("FOO_BAR") == "Foo-Bar");
 /// assert!(to_train_case("foo_bar") == "Foo-Bar");

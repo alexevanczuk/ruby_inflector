@@ -3,7 +3,7 @@ use crate::case::*;
 ///
 /// ```
 /// use ruby_inflector::case::title::to_title_case;
-/// 
+///
 /// assert!(to_title_case("Foo bar") == "Foo Bar");
 /// assert!(to_title_case("FooBar") == "Foo Bar");
 /// assert!(to_title_case("fooBar") == "Foo Bar");
@@ -27,7 +27,7 @@ pub fn to_title_case(non_title_case_string: &str) -> String {
 ///
 /// ```
 /// use ruby_inflector::case::title::is_title_case;
-/// 
+///
 /// assert!(is_title_case("Foo Bar String That Is Really Really Long"));
 /// assert!(!is_title_case("foo-bar-string-that-is-really-really-long"));
 /// assert!(!is_title_case("FooBarIsAReallyReallyLongString"));
