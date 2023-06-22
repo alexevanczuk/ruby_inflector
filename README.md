@@ -4,8 +4,8 @@ This project is forked from https://github.com/chrislearn/cruet.
 
 The intent of this library is to emulate https://api.rubyonrails.org/classes/ActiveSupport/Inflector.html as closely as possible to allow for rust implementations of ruby tools.
 
-![CI](https://github.com/alexevanczuk/packs/actions/workflows/ci.yml/badge.svg)
-![Audit](https://github.com/alexevanczuk/packs/actions/workflows/audit.yml/badge.svg)
+![CI](https://github.com/alexevanczuk/ruby_inflector/actions/workflows/ci.yml/badge.svg)
+![Audit](https://github.com/alexevanczuk/ruby_inflector/actions/workflows/audit.yml/badge.svg)
 
 Adds String based inflections for Rust. Snake, kebab, train, camel,
 sentence, class, and title cases as well as ordinalize,
