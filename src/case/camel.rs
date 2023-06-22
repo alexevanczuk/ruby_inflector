@@ -198,6 +198,13 @@ mod tests {
     }
 
     #[test]
+    fn has_an_integer() {
+        let convertable_string: String = "my_401k_contribution".to_owned();
+        let expected: String = "My401kContribution".to_owned();
+        assert_eq!(crate::to_class_case(&convertable_string), expected)
+    }
+
+    #[test]
     fn is_correct_from_camel_case() {
         let convertable_string: String = "fooBar".to_owned();
         assert_eq!(is_camel_case(&convertable_string), true)
