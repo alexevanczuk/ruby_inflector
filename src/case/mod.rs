@@ -142,6 +142,7 @@ pub fn to_case_camel_like(
 fn capitalize_acronym_substrings(str: &str, _acronyms: HashSet<String>) -> String {
     let mut new_string = str.to_string();
     for acronym in _acronyms {
+        // There will probably be a bug here. See test_inflected_acronyms_buggy_behavior
         // let pattern = format!(r"(?:\b)(?i)({})(?-i)(?:\b)", acronym);
         let pattern = format!(r"(?i)({})(?-i)", acronym);
 
@@ -466,4 +467,21 @@ fn test_inflected_acronyms() {
         to_class_case("service_api_error", acronyms),
         "ServiceAPIError".to_string()
     );
+}
+
+#[test]
+#[ignore]
+fn test_inflected_acronyms_buggy_behavior() {
+    let _options = CamelOptions {
+        new_word: true,
+        last_char: ' ',
+        first_word: false,
+        injectable_char: ' ',
+        has_seperator: false,
+        inverted: false,
+    };
+
+    let acronyms: HashSet<String> = vec![String::from("API")].into_iter().collect();
+
+    assert_eq!(to_class_case("apithing", acronyms), "Apithing".to_string());
 }
