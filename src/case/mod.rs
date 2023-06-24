@@ -147,11 +147,6 @@ fn capitalize_acronym_substrings(str: &str, acronyms: &HashSet<String>) -> Strin
         let pattern = format!(r"(?i)({})(?-i)", acronym);
 
         let re = Regex::new(&pattern).unwrap();
-        for caps in re.captures_iter(&new_string) {
-            let matched = caps.get(0).unwrap().as_str();
-            println!("Matched: {}", matched);
-        }
-
         let mut result = re.replace_all(&new_string, |caps: &regex::Captures| {
             let matched = caps.get(1).unwrap().as_str();
             matched.to_uppercase()
