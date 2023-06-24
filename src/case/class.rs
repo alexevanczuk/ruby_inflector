@@ -5,15 +5,15 @@ use crate::string::singularize::to_singular;
 ///
 /// ```
 /// use ruby_inflector::case::to_class_case;
-///
-/// assert_eq!(to_class_case("FooBar"), "FooBar");
-/// assert_eq!(to_class_case("FooBars"), "FooBar");
-/// assert_eq!(to_class_case("Foo Bar"), "FooBar");
-/// assert_eq!(to_class_case("foo-bar"), "FooBar");
-/// assert_eq!(to_class_case("fooBar"), "FooBar");
-/// assert_eq!(to_class_case("FOO_BAR"), "FooBar");
-/// assert_eq!(to_class_case("foo_bars"), "FooBar");
-/// assert_eq!(to_class_case("Foo bar"), "FooBar");
+/// use std::collections::HashSet;
+/// assert_eq!(to_class_case("FooBar", HashSet::new()), "FooBar");
+/// assert_eq!(to_class_case("FooBars", HashSet::new()), "FooBar");
+/// assert_eq!(to_class_case("Foo Bar", HashSet::new()), "FooBar");
+/// assert_eq!(to_class_case("foo-bar", HashSet::new()), "FooBar");
+/// assert_eq!(to_class_case("fooBar", HashSet::new()), "FooBar");
+/// assert_eq!(to_class_case("FOO_BAR", HashSet::new()), "FooBar");
+/// assert_eq!(to_class_case("foo_bars", HashSet::new()), "FooBar");
+/// assert_eq!(to_class_case("Foo bar", HashSet::new()), "FooBar");
 /// ```
 pub fn to_class_case(non_class_case_string: &str, acronyms: HashSet<String>) -> String {
     let options = CamelOptions {

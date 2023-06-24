@@ -20,6 +20,8 @@ pub use camel::to_camel_case;
 ///
 /// Example string `snake_case`
 pub mod snake;
+
+use regex::Regex;
 pub use snake::is_snake_case;
 pub use snake::to_snake_case;
 
@@ -107,7 +109,7 @@ pub fn to_case_snake_like(convertable_string: &str, replace_with: &str, case: &s
 pub fn to_case_camel_like(
     convertable_string: &str,
     camel_options: CamelOptions,
-    _acronyms: HashSet<String>,
+    acronyms: HashSet<String>,
 ) -> String {
     let mut new_word: bool = camel_options.new_word;
     let mut first_word: bool = camel_options.first_word;
@@ -131,7 +133,37 @@ pub fn to_case_camel_like(
             result.push(character.to_ascii_lowercase());
         }
     }
+
+    result = capitalize_acronym_substrings(&result, acronyms);
+
     result
+}
+
+fn capitalize_acronym_substrings(str: &str, _acronyms: HashSet<String>) -> String {
+    let mut new_string = str.to_string();
+    for acronym in _acronyms {
+        // let pattern = format!(r"(?:\b)(?i)({})(?-i)(?:\b)", acronym);
+        let pattern = format!(r"(?i)({})(?-i)", acronym);
+
+        dbg!(&acronym);
+
+        let re = Regex::new(&pattern).unwrap();
+        for caps in re.captures_iter(&new_string) {
+            let matched = caps.get(0).unwrap().as_str();
+            println!("Matched: {}", matched);
+        }
+
+        let mut result = re.replace_all(&new_string, |caps: &regex::Captures| {
+            let matched = caps.get(1).unwrap().as_str();
+            dbg!(&matched);
+            matched.to_uppercase()
+        });
+
+        dbg!(&result);
+        new_string = result.to_mut().to_string();
+    }
+
+    new_string
 }
 
 #[inline]
@@ -431,7 +463,7 @@ fn test_inflected_acronyms() {
     let acronyms: HashSet<String> = vec![String::from("API")].into_iter().collect();
 
     assert_eq!(
-        to_camel_case("ServiceApiError", acronyms),
+        to_class_case("service_api_error", acronyms),
         "ServiceAPIError".to_string()
     );
 }

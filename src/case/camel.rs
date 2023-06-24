@@ -4,16 +4,16 @@ use crate::case::*;
 ///
 /// ```
 /// use ruby_inflector::case::to_camel_case;
-///
-/// assert_eq!(to_camel_case("fooBar"), "fooBar");
-/// assert_eq!(to_camel_case("FOO_BAR"), "fooBar");
-/// assert_eq!(to_camel_case("Foo Bar"), "fooBar");
-/// assert_eq!(to_camel_case("foo_bar"), "fooBar");
-/// assert_eq!(to_camel_case("Foo bar"), "fooBar");
-/// assert_eq!(to_camel_case("foo-bar"), "fooBar");
-/// assert_eq!(to_camel_case("FooBar"), "fooBar");
-/// assert_eq!(to_camel_case("FooBar3"), "fooBar3");
-/// assert_eq!(to_camel_case("Foo-Bar"), "fooBar");
+/// use std::collections::HashSet;
+/// assert_eq!(to_camel_case("fooBar", HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("FOO_BAR", HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("Foo Bar", HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("foo_bar", HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("Foo bar", HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("foo-bar", HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("FooBar", HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("FooBar3", HashSet::new()), "fooBar3");
+/// assert_eq!(to_camel_case("Foo-Bar", HashSet::new()), "fooBar");
 /// ```
 pub fn to_camel_case(non_camelized_string: &str, acronyms: HashSet<String>) -> String {
     let options = CamelOptions {

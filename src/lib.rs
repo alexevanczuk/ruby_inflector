@@ -11,11 +11,6 @@
 //! sentence, class, and title cases as well as ordinalize,
 //! deordinalize, demodulize, deconstantize, and foreign key are supported as
 //! both traits and pure functions acting on String types.
-//! ```rust
-//! use ruby_inflector::Inflector;
-//! let camel_case_string: String = "some_string".to_camel_case();
-//! let is_camel_cased: bool= camel_case_string.is_camel_case();
-//! assert!(is_camel_cased == true);
 //! ```
 
 /// Provides case inflections
