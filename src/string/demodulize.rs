@@ -37,7 +37,7 @@ use crate::case::class::to_class_case;
 pub fn demodulize(non_demodulize_string: &str) -> String {
     if non_demodulize_string.contains("::") {
         let split_string: Vec<&str> = non_demodulize_string.split("::").collect();
-        to_class_case(split_string[split_string.len() - 1])
+        to_class_case(split_string[split_string.len() - 1], vec![])
     } else {
         non_demodulize_string.to_owned()
     }

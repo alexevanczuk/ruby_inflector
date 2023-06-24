@@ -102,7 +102,11 @@ pub fn to_case_snake_like(convertable_string: &str, replace_with: &str, case: &s
 }
 
 #[doc(hidden)]
-pub fn to_case_camel_like(convertable_string: &str, camel_options: CamelOptions) -> String {
+pub fn to_case_camel_like(
+    convertable_string: &str,
+    camel_options: CamelOptions,
+    _acronyms: Vec<String>,
+) -> String {
     let mut new_word: bool = camel_options.new_word;
     let mut first_word: bool = camel_options.first_word;
     let mut last_char: char = camel_options.last_char;
@@ -415,4 +419,21 @@ fn test_not_first_word_and_has_seperator_not_first_and_not_seperator() {
 #[test]
 fn test_not_first_word_and_has_seperator_not_first_and_has_seperator() {
     assert_eq!(not_first_word_and_has_seperator(false, true), true)
+}
+
+#[test]
+fn test_inflected_acronyms() {
+    let options = CamelOptions {
+        new_word: true,
+        last_char: ' ',
+        first_word: false,
+        injectable_char: ' ',
+        has_seperator: false,
+        inverted: false,
+    };
+
+    assert_eq!(
+        to_camel_case("ServiceApiError", vec![String::from("API")]),
+        "ServiceAPIError".to_string()
+    );
 }

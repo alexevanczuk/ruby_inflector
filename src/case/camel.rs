@@ -15,7 +15,7 @@ use crate::case::*;
 /// assert_eq!(to_camel_case("FooBar3"), "fooBar3");
 /// assert_eq!(to_camel_case("Foo-Bar"), "fooBar");
 /// ```
-pub fn to_camel_case(non_camelized_string: &str) -> String {
+pub fn to_camel_case(non_camelized_string: &str, acronyms: Vec<String>) -> String {
     let options = CamelOptions {
         new_word: false,
         last_char: ' ',
@@ -24,7 +24,7 @@ pub fn to_camel_case(non_camelized_string: &str) -> String {
         has_seperator: false,
         inverted: false,
     };
-    to_case_camel_like(non_camelized_string, options)
+    to_case_camel_like(non_camelized_string, options, acronyms)
 }
 
 /// Determines if a `&str` is camelCase bool``
@@ -45,7 +45,7 @@ pub fn to_camel_case(non_camelized_string: &str) -> String {
 /// assert!(!is_camel_case("Foo Bar Is A Really Really Long String"));
 /// ```
 pub fn is_camel_case(test_string: &str) -> bool {
-    to_camel_case(test_string) == test_string
+    to_camel_case(test_string, vec![]) == test_string
 }
 
 #[cfg(all(feature = "unstable", test))]
@@ -97,91 +97,91 @@ mod tests {
     fn from_camel_case() {
         let convertable_string: String = "fooBar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn from_pascal_case() {
         let convertable_string: String = "FooBar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn from_kebab_case() {
         let convertable_string: String = "foo-bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn from_sentence_case() {
         let convertable_string: String = "Foo bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn from_title_case() {
         let convertable_string: String = "Foo Bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn from_train_case() {
         let convertable_string: String = "Foo-Bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn from_screaming_snake_case() {
         let convertable_string: String = "FOO_BAR".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn from_snake_case() {
         let convertable_string: String = "foo_bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn from_case_with_loads_of_space() {
         let convertable_string: String = "foo           bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn a_name_with_a_dot() {
         let convertable_string: String = "Robert C. Martin".to_owned();
         let expected: String = "robertCMartin".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn random_text_with_bad_chars() {
         let convertable_string: String = "Random text with *(bad) chars".to_owned();
         let expected: String = "randomTextWithBadChars".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn trailing_bad_chars() {
         let convertable_string: String = "trailing bad_chars*(()())".to_owned();
         let expected: String = "trailingBadChars".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn leading_bad_chars() {
         let convertable_string: String = "-!#$%leading bad chars".to_owned();
         let expected: String = "leadingBadChars".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
@@ -189,21 +189,21 @@ mod tests {
         let convertable_string: String =
             "-!#$%wrapped in bad chars&*^*&(&*^&(<><?>><?><>))".to_owned();
         let expected: String = "wrappedInBadChars".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn has_a_sign() {
         let convertable_string: String = "has a + sign".to_owned();
         let expected: String = "hasASign".to_owned();
-        assert_eq!(to_camel_case(&convertable_string), expected)
+        assert_eq!(to_camel_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
     fn has_an_integer_followed_by_a_letter() {
         let convertable_string: String = "my_401k_contribution".to_owned();
         let expected: String = "My401kContribution".to_owned();
-        assert_eq!(crate::to_class_case(&convertable_string), expected)
+        assert_eq!(crate::to_class_case(&convertable_string, vec![]), expected)
     }
 
     #[test]
@@ -219,7 +219,7 @@ mod tests {
         let convertable_string: String = "abc123_xyz".to_owned();
         let expected: String = "Abc123Xyz".to_owned();
         assert_eq!(
-            crate::case::to_case_camel_like(&convertable_string, options),
+            crate::case::to_case_camel_like(&convertable_string, options, vec![]),
             expected
         )
     }
@@ -227,48 +227,48 @@ mod tests {
     #[test]
     fn is_correct_from_camel_case() {
         let convertable_string: String = "fooBar".to_owned();
-        assert_eq!(is_camel_case(&convertable_string), true)
+        assert!(is_camel_case(&convertable_string))
     }
 
     #[test]
     fn is_correct_from_pascal_case() {
         let convertable_string: String = "FooBar".to_owned();
-        assert_eq!(is_camel_case(&convertable_string), false)
+        assert!(!is_camel_case(&convertable_string))
     }
 
     #[test]
     fn is_correct_from_kebab_case() {
         let convertable_string: String = "foo-bar".to_owned();
-        assert_eq!(is_camel_case(&convertable_string), false)
+        assert!(!is_camel_case(&convertable_string))
     }
 
     #[test]
     fn is_correct_from_sentence_case() {
         let convertable_string: String = "Foo bar".to_owned();
-        assert_eq!(is_camel_case(&convertable_string), false)
+        assert!(!is_camel_case(&convertable_string))
     }
 
     #[test]
     fn is_correct_from_title_case() {
         let convertable_string: String = "Foo Bar".to_owned();
-        assert_eq!(is_camel_case(&convertable_string), false)
+        assert!(!is_camel_case(&convertable_string))
     }
 
     #[test]
     fn is_correct_from_train_case() {
         let convertable_string: String = "Foo-Bar".to_owned();
-        assert_eq!(is_camel_case(&convertable_string), false)
+        assert!(!is_camel_case(&convertable_string))
     }
 
     #[test]
     fn is_correct_from_screaming_snake_case() {
         let convertable_string: String = "FOO_BAR".to_owned();
-        assert_eq!(is_camel_case(&convertable_string), false)
+        assert!(!is_camel_case(&convertable_string))
     }
 
     #[test]
     fn is_correct_from_snake_case() {
         let convertable_string: String = "foo_bar".to_owned();
-        assert_eq!(is_camel_case(&convertable_string), false)
+        assert!(!is_camel_case(&convertable_string))
     }
 }

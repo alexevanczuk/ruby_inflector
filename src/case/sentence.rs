@@ -20,7 +20,7 @@ pub fn to_sentence_case(non_sentence_case_string: &str) -> String {
         has_seperator: true,
         inverted: true,
     };
-    to_case_camel_like(non_sentence_case_string, options)
+    to_case_camel_like(non_sentence_case_string, options, vec![])
 }
 /// Determines of a `&str` is `Sentence case`
 ///

@@ -20,7 +20,7 @@ pub fn to_title_case(non_title_case_string: &str) -> String {
         has_seperator: true,
         inverted: false,
     };
-    to_case_camel_like(non_title_case_string, options)
+    to_case_camel_like(non_title_case_string, options, vec![])
 }
 
 /// Determines if a `&str` is `Title Case`
