@@ -4,6 +4,8 @@
 ///
 /// Example string `ClassCase`
 pub mod class;
+use std::collections::HashSet;
+
 pub use class::is_class_case;
 pub use class::to_class_case;
 
@@ -105,7 +107,7 @@ pub fn to_case_snake_like(convertable_string: &str, replace_with: &str, case: &s
 pub fn to_case_camel_like(
     convertable_string: &str,
     camel_options: CamelOptions,
-    _acronyms: Vec<String>,
+    _acronyms: HashSet<String>,
 ) -> String {
     let mut new_word: bool = camel_options.new_word;
     let mut first_word: bool = camel_options.first_word;
@@ -120,6 +122,7 @@ pub fn to_case_camel_like(
         } else if last_char_lower_current_is_upper_or_new_word(new_word, last_char, character) {
             found_real_char = true;
             new_word = false;
+
             result = append_on_new_word(result, first_word, character, &camel_options);
             first_word = false;
         } else {
@@ -353,37 +356,35 @@ fn test_char_is_seperator_when_not() {
 
 #[test]
 fn test_last_char_lower_current_is_upper_or_new_word_with_new_word() {
-    assert!(
-        last_char_lower_current_is_upper_or_new_word(true, ' ', '-')
-    )
+    assert!(last_char_lower_current_is_upper_or_new_word(true, ' ', '-'))
 }
 
 #[test]
 fn test_last_char_lower_current_is_upper_or_new_word_last_char_space() {
-    assert!(
-        !last_char_lower_current_is_upper_or_new_word(false, ' ', '-')
-    )
+    assert!(!last_char_lower_current_is_upper_or_new_word(
+        false, ' ', '-'
+    ))
 }
 
 #[test]
 fn test_last_char_lower_current_is_upper_or_new_word_last_char_lower_current_upper() {
-    assert!(
-        last_char_lower_current_is_upper_or_new_word(false, 'a', 'A')
-    )
+    assert!(last_char_lower_current_is_upper_or_new_word(
+        false, 'a', 'A'
+    ))
 }
 
 #[test]
 fn test_last_char_lower_current_is_upper_or_new_word_last_char_upper_current_upper() {
-    assert!(
-        !last_char_lower_current_is_upper_or_new_word(false, 'A', 'A')
-    )
+    assert!(!last_char_lower_current_is_upper_or_new_word(
+        false, 'A', 'A'
+    ))
 }
 
 #[test]
 fn test_last_char_lower_current_is_upper_or_new_word_last_char_upper_current_lower() {
-    assert!(
-        !last_char_lower_current_is_upper_or_new_word(false, 'A', 'a')
-    )
+    assert!(!last_char_lower_current_is_upper_or_new_word(
+        false, 'A', 'a'
+    ))
 }
 
 #[test]
@@ -427,8 +428,10 @@ fn test_inflected_acronyms() {
         inverted: false,
     };
 
+    let acronyms: HashSet<String> = vec![String::from("API")].into_iter().collect();
+
     assert_eq!(
-        to_camel_case("ServiceApiError", vec![String::from("API")]),
+        to_camel_case("ServiceApiError", acronyms),
         "ServiceAPIError".to_string()
     );
 }

@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use crate::case::class::to_class_case;
 
 /// Deconstantizes a `&str`
@@ -38,7 +40,7 @@ pub fn deconstantize(non_deconstantized_string: &str) -> String {
     if non_deconstantized_string.contains("::") {
         let split_string: Vec<&str> = non_deconstantized_string.split("::").collect();
         if split_string.len() > 1 {
-            to_class_case(split_string[split_string.len() - 2], vec![])
+            to_class_case(split_string[split_string.len() - 2], HashSet::new())
         } else {
             "".to_owned()
         }
