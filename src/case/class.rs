@@ -179,7 +179,7 @@ mod tests {
     #[test]
     fn is_correct_from_pascal_case() {
         let convertable_string: String = "FooBar".to_owned();
-        assert_eq!(is_class_case(&convertable_string), true)
+        assert!(is_class_case(&convertable_string))
     }
 
     #[test]
@@ -221,6 +221,6 @@ mod tests {
     #[test]
     fn is_correct_from_table_case() {
         let convertable_string: String = "FooBar".to_owned();
-        assert_eq!(is_class_case(&convertable_string), true)
+        assert!(is_class_case(&convertable_string))
     }
 }
