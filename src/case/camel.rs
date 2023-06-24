@@ -5,17 +5,17 @@ use crate::case::*;
 /// ```
 /// use ruby_inflector::case::to_camel_case;
 /// use std::collections::HashSet;
-/// assert_eq!(to_camel_case("fooBar", HashSet::new()), "fooBar");
-/// assert_eq!(to_camel_case("FOO_BAR", HashSet::new()), "fooBar");
-/// assert_eq!(to_camel_case("Foo Bar", HashSet::new()), "fooBar");
-/// assert_eq!(to_camel_case("foo_bar", HashSet::new()), "fooBar");
-/// assert_eq!(to_camel_case("Foo bar", HashSet::new()), "fooBar");
-/// assert_eq!(to_camel_case("foo-bar", HashSet::new()), "fooBar");
-/// assert_eq!(to_camel_case("FooBar", HashSet::new()), "fooBar");
-/// assert_eq!(to_camel_case("FooBar3", HashSet::new()), "fooBar3");
-/// assert_eq!(to_camel_case("Foo-Bar", HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("fooBar", &HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("FOO_BAR", &HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("Foo Bar", &HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("foo_bar", &HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("Foo bar", &HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("foo-bar", &HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("FooBar", &HashSet::new()), "fooBar");
+/// assert_eq!(to_camel_case("FooBar3", &HashSet::new()), "fooBar3");
+/// assert_eq!(to_camel_case("Foo-Bar", &HashSet::new()), "fooBar");
 /// ```
-pub fn to_camel_case(non_camelized_string: &str, acronyms: HashSet<String>) -> String {
+pub fn to_camel_case(non_camelized_string: &str, acronyms: &HashSet<String>) -> String {
     let options = CamelOptions {
         new_word: false,
         last_char: ' ',
@@ -45,7 +45,7 @@ pub fn to_camel_case(non_camelized_string: &str, acronyms: HashSet<String>) -> S
 /// assert!(!is_camel_case("Foo Bar Is A Really Really Long String"));
 /// ```
 pub fn is_camel_case(test_string: &str) -> bool {
-    to_camel_case(test_string, HashSet::new()) == test_string
+    to_camel_case(test_string, &HashSet::new()) == test_string
 }
 
 #[cfg(all(feature = "unstable", test))]
@@ -99,91 +99,130 @@ mod tests {
     fn from_camel_case() {
         let convertable_string: String = "fooBar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn from_pascal_case() {
         let convertable_string: String = "FooBar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn from_kebab_case() {
         let convertable_string: String = "foo-bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn from_sentence_case() {
         let convertable_string: String = "Foo bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn from_title_case() {
         let convertable_string: String = "Foo Bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn from_train_case() {
         let convertable_string: String = "Foo-Bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn from_screaming_snake_case() {
         let convertable_string: String = "FOO_BAR".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn from_snake_case() {
         let convertable_string: String = "foo_bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn from_case_with_loads_of_space() {
         let convertable_string: String = "foo           bar".to_owned();
         let expected: String = "fooBar".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn a_name_with_a_dot() {
         let convertable_string: String = "Robert C. Martin".to_owned();
         let expected: String = "robertCMartin".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn random_text_with_bad_chars() {
         let convertable_string: String = "Random text with *(bad) chars".to_owned();
         let expected: String = "randomTextWithBadChars".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn trailing_bad_chars() {
         let convertable_string: String = "trailing bad_chars*(()())".to_owned();
         let expected: String = "trailingBadChars".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn leading_bad_chars() {
         let convertable_string: String = "-!#$%leading bad chars".to_owned();
         let expected: String = "leadingBadChars".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
@@ -191,14 +230,20 @@ mod tests {
         let convertable_string: String =
             "-!#$%wrapped in bad chars&*^*&(&*^&(<><?>><?><>))".to_owned();
         let expected: String = "wrappedInBadChars".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
     fn has_a_sign() {
         let convertable_string: String = "has a + sign".to_owned();
         let expected: String = "hasASign".to_owned();
-        assert_eq!(to_camel_case(&convertable_string, HashSet::new()), expected)
+        assert_eq!(
+            to_camel_case(&convertable_string, &HashSet::new()),
+            expected
+        )
     }
 
     #[test]
@@ -206,7 +251,7 @@ mod tests {
         let convertable_string: String = "my_401k_contribution".to_owned();
         let expected: String = "My401kContribution".to_owned();
         assert_eq!(
-            crate::to_class_case(&convertable_string, HashSet::new()),
+            crate::to_class_case(&convertable_string, &HashSet::new()),
             expected
         )
     }
@@ -224,7 +269,7 @@ mod tests {
         let convertable_string: String = "abc123_xyz".to_owned();
         let expected: String = "Abc123Xyz".to_owned();
         assert_eq!(
-            crate::case::to_case_camel_like(&convertable_string, options, HashSet::new()),
+            crate::case::to_case_camel_like(&convertable_string, options, &HashSet::new()),
             expected
         )
     }

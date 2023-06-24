@@ -109,7 +109,7 @@ pub fn to_case_snake_like(convertable_string: &str, replace_with: &str, case: &s
 pub fn to_case_camel_like(
     convertable_string: &str,
     camel_options: CamelOptions,
-    acronyms: HashSet<String>,
+    acronyms: &HashSet<String>,
 ) -> String {
     let mut new_word: bool = camel_options.new_word;
     let mut first_word: bool = camel_options.first_word;
@@ -139,9 +139,9 @@ pub fn to_case_camel_like(
     result
 }
 
-fn capitalize_acronym_substrings(str: &str, _acronyms: HashSet<String>) -> String {
+fn capitalize_acronym_substrings(str: &str, acronyms: &HashSet<String>) -> String {
     let mut new_string = str.to_string();
-    for acronym in _acronyms {
+    for acronym in acronyms {
         // There will probably be a bug here. See test_inflected_acronyms_buggy_behavior
         // let pattern = format!(r"(?:\b)(?i)({})(?-i)(?:\b)", acronym);
         let pattern = format!(r"(?i)({})(?-i)", acronym);
@@ -464,7 +464,7 @@ fn test_inflected_acronyms() {
     let acronyms: HashSet<String> = vec![String::from("API")].into_iter().collect();
 
     assert_eq!(
-        to_class_case("service_api_error", acronyms),
+        to_class_case("service_api_error", &acronyms),
         "ServiceAPIError".to_string()
     );
 }
@@ -483,5 +483,5 @@ fn test_inflected_acronyms_buggy_behavior() {
 
     let acronyms: HashSet<String> = vec![String::from("API")].into_iter().collect();
 
-    assert_eq!(to_class_case("apithing", acronyms), "Apithing".to_string());
+    assert_eq!(to_class_case("apithing", &acronyms), "Apithing".to_string());
 }

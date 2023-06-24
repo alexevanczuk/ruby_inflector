@@ -22,7 +22,7 @@ pub fn to_pascal_case(non_pascalized_string: &str) -> String {
         has_seperator: false,
         inverted: false,
     };
-    to_case_camel_like(non_pascalized_string, options, HashSet::new())
+    to_case_camel_like(non_pascalized_string, options, &HashSet::new())
 }
 
 /// Determines if a `&str` is pascalCase bool``
